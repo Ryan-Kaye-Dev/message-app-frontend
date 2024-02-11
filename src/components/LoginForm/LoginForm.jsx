@@ -2,10 +2,12 @@ import React, { useState } from "react";
 import "../../stylesheets/SignupForm.css";
 import { useNavigate } from "react-router-dom";
 import { HashLoader } from "react-spinners";
+import { useAuth } from "../contexts/AuthContext";
 
 const LoginForm = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
+  const { login } = useAuth();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -26,7 +28,18 @@ const LoginForm = () => {
 
       if (response.ok) {
         const responseData = await response.json();
-        console.log(responseData);
+
+        // Handle authentication token
+        const token = responseData.token;
+
+        // Store the token securely, for example, in an HTTP-only cookie
+        document.cookie = `tokenCookie=${token}; path=/; secure; HttpOnly; SameSite=Strict`;
+
+        console.log("Login successful. Token:", token);
+
+        // Update the login state
+        login();
+
         navigate("/"); // Programmatically navigate to login page
       } else {
         throw new Error("Login failed");
@@ -39,7 +52,7 @@ const LoginForm = () => {
   };
 
   return (
-    <div className="flex flex-col bg-gray-100 px-10 rounded-lg shadow-xl text-gray-500">
+    <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-gray-100 px-10 rounded-lg shadow-xl text-gray-500 text-center">
       {loading ? (
         <div className="flex items-center justify-center py-5">
           <HashLoader color={"#2dd4bf"} loading={loading} size={80} />
@@ -89,9 +102,9 @@ const LoginForm = () => {
             type="submit"
           >
             {" "}
-            Sign Up
+            Log In
           </button>
-          <div className="my-2">
+          <div className="my-2 mx-4">
             Don't have an account yet? <a href="/signup">Create Account</a>
           </div>
         </form>
