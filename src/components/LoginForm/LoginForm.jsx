@@ -33,9 +33,10 @@ const LoginForm = () => {
         const token = responseData.token;
 
         // Store the token securely, for example, in an HTTP-only cookie
-        document.cookie = `tokenCookie=${token}; path=/; secure; HttpOnly; SameSite=Strict`;
+        document.cookie = `tokenCookie=${token}; path=/; SameSite=Strict`;
 
         console.log("Login successful. Token:", token);
+        console.log("Cookie:", document.cookie);
 
         // Update the login state
         login();
