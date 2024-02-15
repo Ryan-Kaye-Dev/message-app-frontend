@@ -28,13 +28,13 @@ const ChatBubble = ({ chatroom }) => {
       {isHovering && (
         <Tooltip
           x={mousePosition.x}
-          y={mousePosition.y + 20}
+          y={mousePosition.y + 15}
           label={chatroom}
         />
       )}
 
       <div
-        className="text-teal-200 rounded-full p-6 m-2 h-8 w-8 flex items-center justify-center bg-stone-700 hover:bg-stone-500 hover:border-s-stone-100 hover:border-stone-50 cursor-pointer font-bold"
+        className="text-teal-200 rounded-full border-stone-400 border-2 p-6 m-2 h-16 w-16 flex items-center justify-center bg-stone-700 hover:bg-stone-500 hover:border-teal-300 hover:border-2 cursor-pointer font-bold"
         onMouseEnter={() => handleHover(true)}
         onMouseLeave={() => handleHover(false)}
       >

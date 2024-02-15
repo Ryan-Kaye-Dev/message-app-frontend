@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import BottomBar from "../components/BottomBar/BottomBar";
 import SideBar from "../components/SideBar/SideBar";
+import ChatWindow from "../components/ChatWindow/ChatWindow";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../components/contexts/AuthContext";
 
@@ -55,10 +56,20 @@ const HomePage = () => {
   }, [isLoggedIn, navigate]);
 
   return (
-    <>
-      <BottomBar user={user} />
-      <SideBar chatrooms={chatrooms} />
-    </>
+    <div className="flex flex-col h-screen">
+      <div className="flex-grow">
+        <div className="text-center bg-stone-800 text-teal-300 text-xl py-2">
+          Chat Rooms
+          <SideBar chatrooms={chatrooms} />
+        </div>
+      </div>
+      <div className="bg-stone-800 my-6 mx-2 p-2 h-full rounded-xl">
+        <ChatWindow />
+      </div>
+      <div className="w-full">
+        <BottomBar user={user} />
+      </div>
+    </div>
   );
 };
 
