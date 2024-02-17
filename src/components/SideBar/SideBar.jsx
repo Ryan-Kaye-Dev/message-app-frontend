@@ -3,7 +3,7 @@ import ChatBubble from "./ChatBubble.jsx";
 
 const SideBar = ({ chatrooms }) => {
   return (
-    <div className="bg-stone-800 flex flex-row justify-center">
+    <div className="bg-gray-50 flex flex-col justify-center ">
       {chatrooms.map((chatroom, index) => (
         <div
           key={index}

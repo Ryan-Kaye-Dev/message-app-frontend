@@ -56,18 +56,24 @@ const HomePage = () => {
   }, [isLoggedIn, navigate]);
 
   return (
-    <div className="flex flex-col h-screen">
-      <div className="flex-grow">
-        <div className="text-center bg-stone-800 text-teal-300 text-xl py-2">
-          Chat Rooms
-          <SideBar chatrooms={chatrooms} />
+    <div className="flex h-screen">
+      {/* Sidebar */}
+      <div className="bg-gray-50 opacity-90 z-10">
+        {" "}
+        {/* Ensure z-index here */}
+        <SideBar chatrooms={chatrooms} />
+      </div>
+
+      {/* Main Content */}
+      <div className="flex flex-col w-full relative z-0">
+        {" "}
+        {/* Ensure z-index here */}
+        <div className="bg-gray-50 opacity-90 my-6 mx-4 p-2 h-full rounded-xl flex-grow">
+          <ChatWindow />
         </div>
-      </div>
-      <div className="bg-stone-800 my-6 mx-2 p-2 h-full rounded-xl">
-        <ChatWindow />
-      </div>
-      <div className="w-full">
-        <BottomBar user={user} />
+        <div className="w-full">
+          <BottomBar user={user} />
+        </div>
       </div>
     </div>
   );

@@ -34,7 +34,7 @@ const ChatBubble = ({ chatroom }) => {
       )}
 
       <div
-        className="text-teal-200 rounded-full border-stone-400 border-2 p-6 m-2 h-16 w-16 flex items-center justify-center bg-stone-700 hover:bg-stone-500 hover:border-teal-300 hover:border-2 cursor-pointer font-bold"
+        className="bg-gray-800 rounded-full border border-gray-600 p-3 m-2 h-12 w-12 flex items-center justify-center cursor-pointer font-bold text-white hover:bg-gray-600"
         onMouseEnter={() => handleHover(true)}
         onMouseLeave={() => handleHover(false)}
       >
