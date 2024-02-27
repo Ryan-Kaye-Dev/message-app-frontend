@@ -2,11 +2,12 @@ import Tooltip from "../SideBar/Tooltip";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const BottomBar = ({ user }) => {
+const BottomBar = ({ user, chatroom }) => {
   const navigate = useNavigate();
   const [isHovering, setIsHovering] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [hoveredItem, setHoveredItem] = useState(null);
+  const [messageInput, setMessageInput] = useState("");
 
   const handleHover = (hovering, item) => {
     setIsHovering(hovering);
@@ -15,6 +16,62 @@ const BottomBar = ({ user }) => {
 
   const handleMousePosition = (event) => {
     setMousePosition({ x: event.clientX, y: event.clientY });
+  };
+
+  const handleSendMessage = async () => {
+    const entrypoint =
+      import.meta.env.VITE_API_ENTRY_POINT +
+      "/chatrooms/" +
+      chatroom._id +
+      "/messages";
+    console.log("Entry Point: ", entrypoint);
+    console.log("Message Body: ", user.userId, messageInput, chatroom._id);
+
+    try {
+      // Get the token from the cookie
+      const tokenCookie = document.cookie
+        .split(";")
+        .find((cookie) => cookie.trim().startsWith("tokenCookie="));
+
+      if (!tokenCookie) {
+        // Handle case where tokenCookie is not found
+        throw new Error("Token cookie not found");
+      }
+
+      const token = tokenCookie.split("=")[1];
+
+      const response = await fetch(entrypoint, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          // Include the token in the Authorization header
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          sender: user.userId,
+          message: messageInput,
+          chatroomid: chatroom._id,
+        }),
+      });
+
+      if (response.ok) {
+        const responseData = await response.json();
+        // Handle success response
+        console.log("Message sent successfully:", responseData);
+      } else {
+        // Handle error response
+        const errorData = await response.json();
+        console.error("Error sending message:", errorData);
+        // Optionally display error message to the user
+      }
+    } catch (error) {
+      console.error("Error sending message:", error);
+      // Handle network errors or other exceptions
+      // Optionally display error message to the user
+    }
+
+    // Clear input after sending message
+    setMessageInput("");
   };
 
   useEffect(() => {
@@ -76,12 +133,14 @@ const BottomBar = ({ user }) => {
         <div className="flex flex-grow items-center">
           <input
             type="text"
+            value={messageInput}
+            onChange={(e) => setMessageInput(e.target.value)}
             className="flex-1 pl-3 py-2 bg-transparent rounded-md border border-stone-600 text-stone-800 focus:outline-none focus:border-stone-500 transition duration-300 ease-in-out"
             placeholder="Enter your message..."
           />
           <button
+            onClick={handleSendMessage}
             className="ml-2 px-4 py-2 bg-teal-600 text-white rounded-md hover:bg-teal-500 transition duration-300 ease-in-out"
-            type="button"
           >
             Send
           </button>

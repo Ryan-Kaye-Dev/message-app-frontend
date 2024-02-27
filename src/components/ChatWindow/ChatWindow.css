@@ -1,0 +1,15 @@
+/* ChatWindow.css */
+
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: teal;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: teal;
+  border-radius: 5px;
+}

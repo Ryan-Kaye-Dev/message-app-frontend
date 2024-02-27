@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import Tooltip from "./Tooltip";
 
-const ChatBubble = ({ chatroom, setCurrentChatroom }) => {
+const NewChatBubble = ({ handleClick }) => {
   const [isHovering, setIsHovering] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
@@ -24,31 +24,26 @@ const ChatBubble = ({ chatroom, setCurrentChatroom }) => {
     }
   }, [isHovering]);
 
-  const handleClick = () => {
-    console.log("Clicked on chat bubble. Current chatroom:", chatroom);
-    setCurrentChatroom(chatroom);
-  };
-
   return (
     <div>
       {isHovering && (
         <Tooltip
           x={mousePosition.x}
           y={mousePosition.y + 15}
-          label={chatroom.name}
+          label={"New Chat"}
         />
       )}
 
       <div
-        className="bg-gray-800 rounded-full border border-gray-600 p-3 m-2 h-12 w-12 flex items-center justify-center cursor-pointer font-bold text-white hover:bg-gray-600"
+        className="bg-slate-800 rounded-full border border-gray-600 p-3 m-2 h-12 w-12 flex items-center justify-center cursor-pointer font-bold text-teal-400 hover:bg-slate-500"
         onMouseEnter={() => handleHover(true)}
         onMouseLeave={() => handleHover(false)}
         onClick={handleClick}
       >
-        {chatroom.name ? chatroom.name[0] : "+"}
+        {"+"}
       </div>
     </div>
   );
 };
 
-export default ChatBubble;
+export default NewChatBubble;
