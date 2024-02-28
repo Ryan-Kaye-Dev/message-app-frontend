@@ -23,7 +23,6 @@ const ChatWindow = ({ chatroom }) => {
           position: "sticky",
           top: 0,
           zIndex: 1,
-          backgroundColor: "#f3f4f6",
           padding: "8px",
         }}
       >
