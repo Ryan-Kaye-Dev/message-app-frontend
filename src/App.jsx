@@ -12,7 +12,7 @@ import "../src/stylesheets/App.css";
 function App() {
   return (
     <AuthProvider>
-      <Router>
+      <Router basename="/message-app-frontend">
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<LoginPage />} />

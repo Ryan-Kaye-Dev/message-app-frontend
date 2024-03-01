@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "../../stylesheets/SignupForm.css";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { HashLoader } from "react-spinners";
 import { useAuth } from "../contexts/AuthContext";
 
@@ -106,7 +106,7 @@ const LoginForm = () => {
             Log In
           </button>
           <div className="my-2 mx-4">
-            Don't have an account yet? <a href="/signup">Create Account</a>
+            Don't have an account yet? <Link to="/signup">Create Account</Link>
           </div>
         </form>
       )}
