@@ -25,7 +25,7 @@ const ChatWindow = ({ chatroom }) => {
           zIndex: 1,
           padding: "8px",
         }}
-        className="bg-teal-300 rounded-md text-center py-2 my-2 font-bold"
+        className="bg-teal-300 rounded-md text-center py-2 my-2 mr-2 font-bold"
       >
         {chatroom.name}
       </div>

@@ -1,6 +1,7 @@
 import Tooltip from "../SideBar/Tooltip";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import FriendsIcon from "../../../src/assets/friends.png";
 
 const BottomBar = ({ user, chatroom }) => {
   const navigate = useNavigate();
@@ -124,11 +125,7 @@ const BottomBar = ({ user, chatroom }) => {
           onMouseLeave={() => handleHover(false, "friends")}
           onClick={() => navigate("/friends")}
         >
-          <img
-            className="h-6 cursor-pointer"
-            src="../../../src/assets/friends.png"
-            alt="friends"
-          />
+          <img className="h-6 cursor-pointer" src={FriendsIcon} alt="friends" />
         </div>
         <div className="flex flex-grow items-center">
           <input

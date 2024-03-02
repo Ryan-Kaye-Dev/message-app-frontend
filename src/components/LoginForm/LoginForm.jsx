@@ -1,8 +1,11 @@
+// LoginForm.jsx
 import React, { useState } from "react";
 import "../../stylesheets/SignupForm.css";
 import { useNavigate, Link } from "react-router-dom";
 import { HashLoader } from "react-spinners";
 import { useAuth } from "../contexts/AuthContext";
+import UserIcon from "../../../src/assets/user.png";
+import PasswordIcon from "../../../src/assets/locked-computer.png";
 
 const LoginForm = () => {
   const navigate = useNavigate();
@@ -62,10 +65,10 @@ const LoginForm = () => {
         <form className="p-4" onSubmit={handleSubmit}>
           {" "}
           <h1 className="p-4 text-teal-500 ">Welcome Back!</h1>
-          <div>
+          <div className="w-full">
             <input
               style={{
-                backgroundImage: "url(../../../src/assets/user.png)",
+                backgroundImage: `url(${UserIcon})`,
                 backgroundSize: "20px",
                 backgroundPosition: "5px 5px",
                 backgroundRepeat: "no-repeat",
@@ -80,10 +83,10 @@ const LoginForm = () => {
               className="w-full p-1 my-2 bg-transparent border border-gray-300 rounded-md text-gray-500"
             />
           </div>{" "}
-          <div>
+          <div className="w-full">
             <input
               style={{
-                backgroundImage: "url(../../../src/assets/locked-computer.png)",
+                backgroundImage: `url(${PasswordIcon})`,
                 backgroundSize: "20px",
                 backgroundPosition: "5px 5px",
                 backgroundRepeat: "no-repeat",

@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import "../../stylesheets/SignupForm.css";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { HashLoader } from "react-spinners";
+import UserIcon from "../../../src/assets/user.png";
+import EmailIcon from "../../../src/assets/envelope.png";
+import PasswordIcon from "../../../src/assets/locked-computer.png";
 
 const SignupForm = () => {
   const navigate = useNavigate();
@@ -49,10 +52,10 @@ const SignupForm = () => {
         <form className="p-4" onSubmit={handleSubmit}>
           {" "}
           <h1 className="p-4 text-teal-500 ">Sign Up</h1>
-          <div>
+          <div className=" w-60">
             <input
               style={{
-                backgroundImage: "url(../../../src/assets/user.png)",
+                backgroundImage: `url(${UserIcon})`,
                 backgroundSize: "20px",
                 backgroundPosition: "5px 5px",
                 backgroundRepeat: "no-repeat",
@@ -70,7 +73,7 @@ const SignupForm = () => {
           <div>
             <input
               style={{
-                backgroundImage: "url(../../../src/assets/envelope.png)",
+                backgroundImage: `url(${EmailIcon})`,
                 backgroundSize: "20px",
                 backgroundPosition: "5px 6px",
                 backgroundRepeat: "no-repeat",
@@ -88,7 +91,7 @@ const SignupForm = () => {
           <div>
             <input
               style={{
-                backgroundImage: "url(../../../src/assets/locked-computer.png)",
+                backgroundImage: `url(${PasswordIcon})`,
                 backgroundSize: "20px",
                 backgroundPosition: "5px 5px",
                 backgroundRepeat: "no-repeat",
@@ -106,7 +109,7 @@ const SignupForm = () => {
           <div>
             <input
               style={{
-                backgroundImage: "url(../../../src/assets/locked-computer.png)",
+                backgroundImage: `url(${PasswordIcon})`,
                 backgroundSize: "20px",
                 backgroundPosition: "5px 5px",
                 backgroundRepeat: "no-repeat",
@@ -129,7 +132,7 @@ const SignupForm = () => {
             Sign Up
           </button>
           <div className="my-2">
-            Already have an account? <a href="/login">Log in</a>
+            Already have an account? <Link to="/login">Log in</Link>
           </div>
         </form>
       )}
