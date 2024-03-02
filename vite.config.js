@@ -5,7 +5,7 @@ import autoprefixer from "autoprefixer";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: "/message-app-frontend/",
+  base: "/message-app-frontend",
   plugins: [react()],
   css: {
     postcss: {
