@@ -34,8 +34,7 @@ const SideBar = ({ handleOpenModal, setCurrentChatroom }) => {
     if (isSidebarOpen) {
       setTimeout(() => {
         setShowBubbles(true);
-      }, 50); // Adjust this delay according to your sidebar animation duration
-    } else {
+      }, 50);
       setShowBubbles(false);
     }
   }, [isSidebarOpen]);
@@ -70,7 +69,7 @@ const SideBar = ({ handleOpenModal, setCurrentChatroom }) => {
         </>
       )}
       <button
-        className="fixed top-5 right-5 bg-blue-500 text-white p-2 rounded-full"
+        className="fixed top-2 right-2 bg-blue-500 text-white p-2 rounded-full"
         onClick={toggleSidebar}
       >
         {isSidebarOpen ? "Hide" : "Show"} Chatrooms

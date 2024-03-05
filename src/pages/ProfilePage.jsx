@@ -32,6 +32,7 @@ const ProfilePage = () => {
           if (response.ok) {
             const userData = await response.json();
             setUser(userData);
+            console.log("User ", user);
           } else {
             throw new Error("User data fetch failed");
           }

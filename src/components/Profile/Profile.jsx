@@ -1,6 +1,38 @@
+import React, { useState } from "react";
 import { HashLoader } from "react-spinners";
 
 const Profile = ({ user }) => {
+  const [loading, setLoading] = useState(false);
+
+  const handleFileUpload = async (e) => {
+    setLoading(true);
+    const file = e.target.files[0];
+    const formData = new FormData();
+    formData.append("avatar", file);
+
+    const entrypoint = import.meta.env.VITE_API_ENTRY_POINT;
+    try {
+      const response = await fetch(`${entrypoint}/user/${user.userId}/upload`, {
+        method: "POST",
+        body: formData,
+        // Add any headers if required, like authorization token
+      });
+      console.log(response);
+      if (response.ok) {
+        // File upload successful, update user avatar in UI or fetch updated user data
+        // For example, you can reload the user data to reflect the new avatar
+        console.log("File uploaded successfully");
+      } else {
+        // File upload failed, handle error
+        console.error("File upload failed");
+      }
+    } catch (error) {
+      console.error("Error uploading file:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   // Check if user exists
   if (!user) {
     return (
@@ -13,7 +45,7 @@ const Profile = ({ user }) => {
   }
 
   // Define avatar URL
-  const avatarUrl = import.meta.env.VITE_ENTRY_POINT + user.avatar;
+  const avatarUrl = import.meta.env.VITE_ENTRY_POINT + "/" + user.avatar;
 
   return (
     <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-gray-100 text-slate-950 rounded-xl py-6 px-6 flex items-center max-w-screen-md mx-auto">
@@ -24,12 +56,15 @@ const Profile = ({ user }) => {
           className="w-48 h-48 object-cover rounded-full"
           style={{ maxWidth: "300px", maxHeight: "300px" }}
         />
-        <button
-          className="mt-4 px-4 py-2 bg-teal-600 text-gray-50 rounded-md hover:bg-teal-500 transition duration-300 ease-in-out"
-          type="submit"
-        >
-          Change Avatar
-        </button>
+        <label className="mt-4 px-4 py-2 bg-teal-600 text-gray-50 rounded-md hover:bg-teal-500 transition duration-300 ease-in-out cursor-pointer">
+          {loading ? "Uploading..." : "Change Avatar"}
+          <input
+            type="file"
+            className="hidden"
+            onChange={handleFileUpload}
+            disabled={loading}
+          />
+        </label>
       </div>
       <div>
         <div className="text-2xl font-bold mb-4">{user.username}</div>
